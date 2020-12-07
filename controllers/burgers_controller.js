@@ -1,61 +1,57 @@
 const express = require("express");
-const router = express.Router();
 const burger = require("../models/burger.js");
 
-// get all from the database
+const router = express.Router();
+
+//Two gets - one for the html and one for the burger data
 router.get("/", function (req, res) {
-  burger.selectAll(function (data) {
-    //convet to object for handlebars!
-    const hbsObject = {
-      burgers: data
-    };
-    console.log(hbsObject);
-    res.render("index", hbsObject);
-  });
+    res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-
-// post a new burger
-router.post("/api/burgers", function (req, res) {
-  burger.insertOne(req.body.burger_name, function (result) {
-    console.log(result);
-    res.json(result);
-  });
+router.get("/burgers", function (req, res) {
+    burger.all(function (data) {
+        res.json({ burgers: data });
+    });
 });
 
-
-// update devoured false to true (when devour btn is clicked)
-router.put("/api/burgers/devoured/:id", function (req, res) {
-  const condition = `id = ${req.params.id};`;
-  const boolean = req.body.devoured;
-
-  // console.log(condition);
-  // console.log("req.body.devoured", boolean);
-
-  burger.updateOne(boolean, condition, function (result) {
-    if (result.changedRows === 0) {
-      //if no rows were changed, the ID must not exist so 404
-      return res.status(404).end();
-    }
-    // console.log(`changeRows: ${result.changedRows}`);
-    res.status(202).end();
-  });
+//Post will handle creating new burgers
+router.post("/burgers", function (req, res) {
+    burger.create(req.body.burger_name, function (result) {
+        console.log("Controller hit!");
+        // Send back the ID of the new quote
+        res.json(result);
+    });
 });
 
+//Put will handle changing burgers to "devoured"
+router.put("/burgers/:id", function (req, res) {
+    let condition = "id = " + req.params.id;
 
-//delete devoured burger (when delete btn is clicked)
-router.delete("/api/burgers/:id", function (req, res) {
-  const condition = `id = ${req.params.id}`;
+    console.log("condition", condition);
 
-  burger.deleteOne(condition, function (result) {
-    if (result.affectedRows === 0) {
-      //if no rows were changed, the ID must not exist so 404
-      return res.status(404).end();
-    }
-    // console.log(`changeRows: ${result.changedRows}`);
-    res.status(202).end();
-  });
+    //ask about this block and what it does:
+    burger.update({
+        devoured: 1
+    }, condition, function (result) {
+        if (result.changedRows == 0) {
+            return res.status(404).end();
+        } else {
+            res.json({ id: req.params.id });
+        }
+    });
 });
 
+router.delete("/burgers/:id", function (req, res) {
+    let condition = "id = " + req.params.id;
+
+    //why is there no need to pass the "table" into this function here? How does passing work.
+    burger.delete(condition, function (result) {
+        if (result.affectedRows == 0) {
+            return res.status(404).end();
+        } else {
+            res.status(200).end();
+        }
+    });
+});
 
 module.exports = router;
