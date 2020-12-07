@@ -23,17 +23,7 @@ function objToSql(ob) {
     // translate array of strings to a single comma-separated string
     return arr.toString();
   }
-//===================================================================================
 
-// function printQuestionMarks(num) {
-//     var arr = [];
-
-//     for (var i = 0; i < num; i++) {
-//         arr.push("?");
-//     }
-
-//     return arr.toString();
-// }
 
 let orm = {
     all: function (tableInput, cb) {
@@ -50,11 +40,7 @@ let orm = {
         console.log("ORM hit!");
         let queryString = `INSERT INTO ${table} (burger_name) VALUES (?)`;
 
-        // queryString += " (";    
-        // queryString += ") ";
-        // queryString += "VALUES (";
-        // queryString += printQuestionMarks(vals.length);
-        // queryString += ") ";
+    
 
         console.log(queryString);
 
