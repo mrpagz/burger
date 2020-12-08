@@ -1,4 +1,4 @@
-// Make sure we wait to attach our handlers until the DOM is fully loaded.
+
 $(function () {
   $.ajax("/burgers", {
     type: "GET"
@@ -6,7 +6,6 @@ $(function () {
     var devouredElem = $("#devoured");
     var burgerElem = $("#notDevoured");
 
-    //references the data table
     var burgers = data.burgers;
     var len = burgers.length;
 
@@ -51,7 +50,7 @@ $(function () {
       devoured: newDevoured
     };
 
-    // Send the PUT request.
+    // Send the request.
     $.ajax("/burgers/" + id, {
       type: "PUT",
       data: JSON.stringify(newDevouredState),
@@ -59,7 +58,7 @@ $(function () {
       contentType: 'application/json'
     }).then(function () {
       console.log("changed devoured to", newDevoured);
-      // Reload the page to get the updated list
+      // Reloads the page
       location.reload();
     });
   });
@@ -67,7 +66,7 @@ $(function () {
 
 
   $(".create-form").on("submit", function (event) {
-    // Make sure to preventDefault on a submit event.
+    //preventDefault on a submit event.
     console.log("Button works");
     event.preventDefault();
 
@@ -96,12 +95,12 @@ $(function () {
   $(document).on("click", ".delete-burger", function (event) {
     var id = $(this).data("id");
 
-    // Send the DELETE request.
+    // DELETE request.
     $.ajax("/burgers/" + id, {
       type: "DELETE"
     }).then(function () {
       console.log("deleted burger", id);
-      // Reload the page to get the updated list
+      // Reload page for updated list
       location.reload();
     });
   });

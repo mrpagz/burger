@@ -8,15 +8,15 @@ h1 {
 }
 
 #notDevouredDiv {
-    float: left;
+    float: right;
     text-align: center;
-    margin-left:100px;
+    margin-left:200px;
 }
 
 #devouredDiv {
-    float: right;
+    float: left;
     text-align: center;
-    margin-right:100px;
+    margin-right:200px;
 }
 
 form {

@@ -3,7 +3,7 @@ const burger = require("../models/burger.js");
 
 const router = express.Router();
 
-//Two gets - one for the html and one for the burger data
+
 router.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "public/index.html"));
 });
@@ -14,7 +14,7 @@ router.get("/burgers", function (req, res) {
     });
 });
 
-//Post will handle creating new burgers
+//will handle creating new burgers
 router.post("/burgers", function (req, res) {
     burger.create(req.body.burger_name, function (result) {
         console.log("Controller hit!");
@@ -23,13 +23,13 @@ router.post("/burgers", function (req, res) {
     });
 });
 
-//Put will handle changing burgers to "devoured"
+//will handle changing burgers to "devoured"
 router.put("/burgers/:id", function (req, res) {
     let condition = "id = " + req.params.id;
 
     console.log("condition", condition);
 
-    //ask about this block and what it does:
+    
     burger.update({
         devoured: 1
     }, condition, function (result) {
@@ -44,7 +44,7 @@ router.put("/burgers/:id", function (req, res) {
 router.delete("/burgers/:id", function (req, res) {
     let condition = "id = " + req.params.id;
 
-    //why is there no need to pass the "table" into this function here? How does passing work.
+    
     burger.delete(condition, function (result) {
         if (result.affectedRows == 0) {
             return res.status(404).end();
