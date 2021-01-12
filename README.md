@@ -1,24 +1,29 @@
-# EatDaBurger
-  [!(https://github.com/mrpagz/burger)
+# eatdaburger
+### Overview
 
-  Heroku link: https://arcane-atoll-82439.herokuapp.com/
-  
-  # Description
-  This is an application for a simple burger menu
-  # Table of Contents 
-  * [Installation](#installation)
-  * [Usage](#usage)
-  * [Contributing](#contributing)
-  * [Tests](#tests)
-  * [Questions](#questions)
-  # Installation
-  The following necessary dependencies must be installed to run the application properly: run "npm init --y", "npm i", "npm install express", "npm install my sql", and "npm install mysequelize".
-  # Usage
-  ​We need to run node server.js and the sql workbench
-  # Contributing
-  ​Contributors: Francis
-  # Tests
-  To run tests, you need to run the following command: node server.js and heroku application
-  # Questions
-  If you have any questions about the repo, open an issue or contact mrpagz directly francisroy1124@gmail.com.
-  
+In this assignment, I created a burger logger with MySQL, Node, Express and an ORM.
+
+### Concept
+
+Eat-Da-Burger! is a restaurant app that lets users input the names of their favorite burgers!
+
+Whenever a user submits their burger, the app will display the burger on the left side of the page waiting to be devoured.
+
+Each burger in the waiting area also has a Devour button. When the user clicks it, the burger will move to the right side of the page.
+
+Each burger on the right side of the page will have a Delete Button. When the user clicks delete, it will be removed from the database and the page.
+
+# Built With
+* HTML/CSS
+* JavaScript
+* Bootstrap
+* jQuery
+* Node.js
+* AJAX
+* APIs
+* Express.js
+* MySQL
+* Heroku
+
+# Developer
+* Carl Logerie
